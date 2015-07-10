@@ -18,7 +18,7 @@ import (
 // do something after the daychange event
 
 type DayChange struct {
-	lock         *sync.Mutex
+	lock         sync.Mutex
 	lastTime     time.Time
 	deadlineTime time.Time
 	notifyChan   chan bool
@@ -54,7 +54,6 @@ func (dc *DayChange) Start(now time.Time) {
 
 func NewDayChange() (dc *DayChange) {
 	dc = &DayChange{
-		lock:       new(sync.Mutex),
 		notifyChan: make(chan bool),
 	}
 	return
